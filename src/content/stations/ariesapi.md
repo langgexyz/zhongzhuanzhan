@@ -4,6 +4,7 @@ name_en: Aries API
 url: https://ariesapi.com/
 affiliate: https://ariesapi.com/register?aff=C5VE2K9NQCYM
 models: []
+protocols: [OpenAI, Anthropic, Gemini, Antigravity]
 priceNote_zh: "站方未公开模型清单与单价（available_channels_enabled = false）；按量付费，支付走 Stripe / Airwallex 国际通道"
 priceNote_en: "Model catalog and pricing not publicly listed (available_channels_enabled = false); PAYG via Stripe / Airwallex (international payments)"
 short_zh: 自研后端的 AI API Gateway。仅 OpenAI 兼容 `/v1` 协议，不公开模型清单与价格。支付走 Stripe / Airwallex；注册限 @qq.com / @gmail.com 邮箱。

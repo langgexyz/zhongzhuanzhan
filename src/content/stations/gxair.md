@@ -28,6 +28,7 @@ models:
   - grok-4.20-0309-non-reasoning
   - grok-imagine-image-lite
   - gpt-image-2
+protocols: [OpenAI, Anthropic, Gemini]
 priceNote_zh: 按 model_ratio × group_ratio 计费；号池分级（claude MAX1 / MAX2 / 满血 / 限时 / 自用 / codex / codex pro / X / gemini / DeepSeek / img），具体 ¥/M tokens 视所属号池
 priceNote_en: Priced by model_ratio × group_ratio. Channels tiered into pools (claude MAX1 / MAX2 / 满血 / 限时 / 自用 / codex / codex pro / X / gemini / DeepSeek / img); concrete ¥/M tokens depends on assigned pool
 short_zh: 基于 new-api v1.0.0-rc.4 的中转站，主打 Claude 4.x 系列（Opus / Sonnet / Haiku 4.5 / 4.6 / 4.7，含 1m context 与 fast 变体），并覆盖 GPT-5 系列、Gemini 3.1、DeepSeek V4、Grok 4.20 与图像模型。

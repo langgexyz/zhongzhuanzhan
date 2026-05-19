@@ -30,6 +30,7 @@ models:
   - qwen/qwen3.5-397b-a17b
   - qwen/qwen3-coder-480b-a35b-instruct
   - free-model
+protocols: [OpenAI, Anthropic]
 priceNote_zh: 混合计费 — Claude 按次（站方公告 sonnet 约 ¥0.02/次），其余按 token ratio；近期 GPT 已降价至原 85%、Claude 多轮降价至五折后再 50%
 priceNote_en: Hybrid billing — Claude per-request (~¥0.02/req for sonnet per announcements), others by token ratio. Recent discounts — GPT down to 85%, Claude reduced repeatedly (down to ~50% × 50%)
 promo_zh: 近期连续降价 — GPT 至原 85%、Claude 五折后再 50%（约 ¥0.02/次起）

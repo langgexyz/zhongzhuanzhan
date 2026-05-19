@@ -6,6 +6,7 @@ affiliate: https://gotoken.cc/home
 models:
   - gpt-5-codex
   - gpt-5
+protocols: [OpenAI]
 priceNote_zh: 订阅 / 30 天，6 档：Mini $10 · Lite $20 · Plus $40 · Pro $60（推荐）· Max $100；周套餐 Pro Weekly $15 / 7d
 priceNote_en: Subscription / 30 days, 6 tiers · Mini $10 · Lite $20 · Plus $40 · Pro $60 (recommended) · Max $100 · Pro Weekly $15 / 7d
 short_zh: 订阅式 OpenAI Codex 多账号路由服务。三档 30 天套餐，按日 / 月配额双限制使用量，含实时用量追踪。

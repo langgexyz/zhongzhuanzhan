@@ -1,6 +1,6 @@
 ---
-name: ZhouPB Sub2API
-name_en: ZhouPB Sub2API
+name: close-AI
+name_en: close-AI
 url: https://sub2api.zhoupb.com/
 affiliate: https://sub2api.zhoupb.com/
 models:
@@ -34,6 +34,7 @@ models:
   - gemini-2.5-flash-lite
   - gemini-2.5-flash-image
   - gemini-2.5-flash-image-preview
+protocols: [OpenAI, Anthropic, Gemini, Antigravity]
 priceNote_zh: 按号池倍率计费；具体 ¥/M tokens 需管理员分配订阅后可见
 priceNote_en: Priced by channel-pool multiplier; concrete ¥/M tokens visible only after admin assigns a subscription
 promo_zh: 注册即送 $5 体验额度（邮箱密码即可，0 验证）

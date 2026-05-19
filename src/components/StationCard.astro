@@ -36,7 +36,7 @@ const promo = pickPromo(d, lang);
 const ctaHref = d.affiliate ?? d.url;
 const detailPath = localizedPath(lang, `/s/${station.id}/`);
 const host = (() => { try { return new URL(d.url).host; } catch { return d.url; } })();
-const modelLabels = stationModelLabels(d.models, lang);
+const modelLabels = stationModelLabels(d.models);
 ---
 
 <article

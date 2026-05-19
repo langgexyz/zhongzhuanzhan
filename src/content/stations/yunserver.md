@@ -29,13 +29,13 @@ status: active
 since: 2026-04
 billing: payg
 prices_zh:
-  GPT: ¥0.8 / M tokens 起 (5.5)
-  Claude: 见站内
-  Gemini: 见站内
+  GPT: ¥0.675/M 起 (5.3-codex)，5.5 ¥1.85/M
+  Claude: ¥0.808/M 起 (混合版)，Opus 4.7 ¥3.06/M
+  Gemini: ¥0.067 / 请求 (3-pro / 3.1)
 prices_en:
-  GPT: from ¥0.8 / 1M tokens (5.5)
-  Claude: see site
-  Gemini: see site
+  GPT: from ¥0.675/M (5.3-codex), 5.5 at ¥1.85/M
+  Claude: from ¥0.808/M (mixed), Opus 4.7 ¥3.06/M
+  Gemini: ¥0.067 / request (3-pro / 3.1)
 ---
 
 ## 接入方式
@@ -56,4 +56,20 @@ prices_en:
 
 ## 计费方式
 
-人民币结算，按模型 token 用量计费。详细价目以站内 `/pricing` 页为准。
+人民币结算，按模型 token 用量计费（图像与 Gemini 系列按请求次数）。下表为各家族在**最低可用号池**下的输入单价（数据抓取自 `/api/pricing`，公式：`model_ratio × 2 × 6.8 × group_ratio`）：
+
+| 模型 | 输入 ¥/M tokens | 输出 ¥/M tokens | 号池 |
+|---|---:|---:|---|
+| gpt-5.3-codex | 0.675 | 5.40 | gpt-default (×1.36) |
+| gpt-5.4 | 1.11 | 6.66 | gpt-default |
+| gpt-5.5 | 1.85 | 11.10 | gpt-default |
+| gpt-5.4-pro | 2.04 | 12.24 | gpt-pro (×2.0) |
+| gpt-5.5-pro | 3.81 | 22.85 | gpt-pro |
+| Claude 混合版 | 0.808 | 8.08 | default (×1.2) |
+| claude-opus-4-6 | 2.72 | 13.60 | claude-default (×1.0) |
+| claude-opus-4-7 | 3.06 | 15.30 | claude-default |
+| gemini-3-pro-preview | — | ¥0.067 / 请求 | default |
+| gemini-3.1-pro-preview | — | ¥0.067 / 请求 | default |
+| gpt-image-2 | — | ¥0.139 / 请求 | gpt-default |
+
+号池倍率：`claude-default 1.0× · default 1.2× · gpt-default 1.36× · gpt-pro 2.0×`。账户默认进 `default` / `gpt-default`，需要 `gpt-pro` 等独享池要联系管理员。

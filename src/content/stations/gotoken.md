@@ -4,8 +4,26 @@ name_en: gotoken.cc
 url: https://gotoken.cc/home
 affiliate: https://gotoken.cc/home
 models:
-  - gpt-5-codex
-  - gpt-5
+  - gpt-5.5
+  - gpt-5.4
+  - gpt-5.4-mini
+  - gpt-5.4-nano
+  - gpt-5.3-codex
+  - gpt-5.3-codex-spark
+  - gpt-5.2
+  - gpt-5.2-pro
+  - gpt-5.2-codex
+  - gpt-5.2-chat-latest
+  - gpt-5.4-2026-03-05
+  - gpt-5.2-2025-12-11
+  - gpt-5.2-pro-2025-12-11
+  - o4-mini
+  - o3-mini
+  - o3-pro
+  - gpt-image-2
+  - gpt-image-1.5
+  - gpt-4o-audio-preview
+  - gpt-4o-realtime-preview
 protocols: [OpenAI]
 priceNote_zh: 订阅制 $10 - $100 / 30 天
 priceNote_en: Subscription, $10 - $100 / 30 days

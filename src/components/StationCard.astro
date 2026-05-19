@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { t, type Lang, localizedPath, pickName, pickShort, pickPriceNote, pickPromo } from '../lib/i18n';
-import { stationModelLabels } from '../lib/model-labels';
+import { t, type Lang, localizedPath, pickName, pickShort, pickPriceNote, pickPromo, pickPrices } from '../lib/i18n';
+import { stationModelLabels, FAMILY_BRANDS } from '../lib/model-labels';
 
 interface Props {
   station: CollectionEntry<'stations'>;
@@ -27,11 +27,17 @@ const statusDot: Record<typeof d.status, string> = {
   unstable: 'bg-[var(--color-warn)]',
   down: 'bg-[var(--color-err)]',
 };
+const billingLabel: Record<typeof d.billing, string> = {
+  payg: ui.billing_payg,
+  subscription: ui.billing_subscription,
+  hybrid: ui.billing_hybrid,
+};
 
 const name = pickName(d, lang);
 const short = pickShort(d, lang);
 const priceNote = pickPriceNote(d, lang);
 const promo = pickPromo(d, lang);
+const prices = pickPrices(d, lang) ?? {};
 
 const ctaHref = d.affiliate ?? d.url;
 const detailPath = localizedPath(lang, `/s/${station.id}/`);
@@ -65,28 +71,36 @@ const modelLabels = stationModelLabels(d.models);
     </div>
   )}
 
-  <dl class="text-[13px] space-y-1.5 text-[var(--color-fg-dim)]">
-    {modelLabels.length > 0 && (
-      <div class="flex gap-3">
-        <dt class="text-[var(--color-fg-mute)] shrink-0 w-12">{ui.card_models}</dt>
-        <dd class="truncate text-[var(--color-fg)]">
-          {modelLabels.slice(0, 4).join(' · ')}{modelLabels.length > 4 && <span class="text-[var(--color-fg-mute)]"> +{modelLabels.length - 4}</span>}
-        </dd>
+  {modelLabels.length > 0 && (
+    <div class="border-t border-[var(--color-line-soft)] pt-3 -mb-1">
+      <div class="flex items-baseline justify-between mb-2">
+        <span class="text-[11px] uppercase tracking-wider font-bold text-[var(--color-fg-mute)]">{ui.card_prices_label}</span>
+        <span class="text-[11px] text-[var(--color-fg-mute)]">{billingLabel[d.billing]}</span>
       </div>
-    )}
-    {priceNote && (
-      <div class="flex gap-3">
-        <dt class="text-[var(--color-fg-mute)] shrink-0 w-12">{ui.card_price}</dt>
-        <dd class="truncate">{priceNote}</dd>
-      </div>
-    )}
-    {d.since && (
-      <div class="flex gap-3">
-        <dt class="text-[var(--color-fg-mute)] shrink-0 w-12">{ui.card_since}</dt>
-        <dd>{d.since}</dd>
-      </div>
-    )}
-  </dl>
+      <ul class="space-y-1.5">
+        {modelLabels.map(family => {
+          const brand = FAMILY_BRANDS[family];
+          const priceStr = prices[family] ?? ui.price_unknown;
+          return (
+            <li class="flex items-center gap-2 text-[13px]">
+              <span
+                class="w-5 h-5 rounded-md flex items-center justify-center font-bold text-[10px] shrink-0"
+                style={`background-color: ${brand.bg}; color: ${brand.fg};`}
+              >{brand.letter}</span>
+              <span class="font-semibold text-[var(--color-fg)] w-14 shrink-0">{family}</span>
+              <span class="text-[var(--color-fg-dim)] truncate text-[12px]">{priceStr}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  )}
+
+  {d.since && (
+    <div class="text-[12px] text-[var(--color-fg-mute)]">
+      {ui.card_since} {d.since}
+    </div>
+  )}
 
   <div class="mt-auto pt-3 flex items-center justify-between border-t border-[var(--color-line-soft)]">
     <a href={detailPath} class="text-[13px] text-[var(--color-fg-mute)] hover:text-[var(--color-fg)] font-medium">{ui.card_detail}</a>

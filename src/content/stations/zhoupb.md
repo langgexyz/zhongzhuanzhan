@@ -23,6 +23,11 @@ tags: [codex-cli, cursor, gpt-5, codex]
 status: active
 since: 2024-09
 featured: true
+billing: payg
+prices_zh:
+  GPT: 登录查看（站点未公开 API 价目）
+prices_en:
+  GPT: login to view (pricing not public)
 ---
 
 ## 接入方式

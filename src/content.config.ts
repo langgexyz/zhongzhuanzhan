@@ -21,6 +21,9 @@ const stations = defineCollection({
     contact: z.string().optional(),
     since: z.string().optional(),
     featured: z.boolean().default(false),
+    billing: z.enum(['payg', 'subscription', 'hybrid']).default('payg'),
+    prices_zh: z.record(z.string()).optional(),
+    prices_en: z.record(z.string()).optional(),
   }),
 });
 

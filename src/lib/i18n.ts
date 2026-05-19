@@ -24,6 +24,12 @@ export const ui = {
     filter_all: '全部',
     card_models: '模型',
     card_price: '定价',
+    card_prices_label: '价格',
+    price_unknown: '见站内',
+    price_login: '登录查看',
+    billing_payg: '按量付费',
+    billing_subscription: '订阅制',
+    billing_hybrid: '混合计费',
     card_since: '上线',
     card_detail: '查看详情',
     card_register: '去注册 →',
@@ -64,6 +70,12 @@ export const ui = {
     filter_all: 'All',
     card_models: 'Models',
     card_price: 'Price',
+    card_prices_label: 'Price',
+    price_unknown: 'see site',
+    price_login: 'login to view',
+    billing_payg: 'Pay-as-you-go',
+    billing_subscription: 'Subscription',
+    billing_hybrid: 'Hybrid',
     card_since: 'Since',
     card_detail: 'Details',
     card_register: 'Sign up →',
@@ -131,6 +143,16 @@ export function pickPriceNote(d: StationLocalizable, lang: Lang): string | undef
 export function pickPromo(d: StationLocalizable, lang: Lang): string | undefined {
   if (lang === 'en') return d.promo_en ?? d.promo_zh;
   return d.promo_zh ?? d.promo_en;
+}
+
+interface StationPricesShape {
+  prices_zh?: Record<string, string>;
+  prices_en?: Record<string, string>;
+}
+
+export function pickPrices(d: StationPricesShape, lang: Lang): Record<string, string> | undefined {
+  if (lang === 'en') return d.prices_en ?? d.prices_zh;
+  return d.prices_zh ?? d.prices_en;
 }
 
 export function formatSupportedCount(lang: Lang, n: number): string {

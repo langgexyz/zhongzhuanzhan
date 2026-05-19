@@ -27,6 +27,15 @@ short_en: A New-API-based relay covering GPT-5 series, Claude 4, Gemini 3, DeepS
 tags: [claude-code, codex-cli, cursor, claude, gpt-5, codex, gemini, deepseek, kimi]
 status: active
 since: 2026-04
+billing: payg
+prices_zh:
+  GPT: ¥0.8 / M tokens 起 (5.5)
+  Claude: 见站内
+  Gemini: 见站内
+prices_en:
+  GPT: from ¥0.8 / 1M tokens (5.5)
+  Claude: see site
+  Gemini: see site
 ---
 
 ## 接入方式

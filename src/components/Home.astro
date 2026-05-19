@@ -1,0 +1,92 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import StationCard from './StationCard.astro';
+import { t, type Lang } from '../lib/i18n';
+import { buildModelIndex } from '../lib/model-labels';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const ui = t(lang);
+
+const stations: CollectionEntry<'stations'>[] = await getCollection('stations');
+
+stations.sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  const order = { active: 0, unstable: 1, down: 2 } as const;
+  if (order[a.data.status] !== order[b.data.status]) return order[a.data.status] - order[b.data.status];
+  return a.data.name.localeCompare(b.data.name);
+});
+
+const modelIndex = buildModelIndex(stations, lang);
+---
+
+<section class="pt-10 sm:pt-16 pb-12 sm:pb-16">
+  <div class="relative max-w-3xl">
+    <span aria-hidden="true" class="absolute -top-4 -left-1 sm:-top-8 sm:-left-6 text-[72px] sm:text-[120px] leading-none font-extrabold text-[var(--color-accent)] select-none pointer-events-none">&ldquo;</span>
+
+    <h1 class="relative pl-8 sm:pl-16 pr-6 sm:pr-12 text-[36px] sm:text-[56px] font-extrabold tracking-tight leading-[1.12] text-[var(--color-fg)]">
+      {ui.hero_q_pre}<span class="text-[var(--color-accent)] whitespace-nowrap">{ui.hero_q_emph}</span>{ui.hero_q_post}
+    </h1>
+
+    <span aria-hidden="true" class="absolute right-0 sm:-right-2 text-[72px] sm:text-[120px] leading-none font-extrabold text-[var(--color-accent)] select-none pointer-events-none" style="top: calc(100% - 0.55em);">&rdquo;</span>
+  </div>
+
+  <p class="mt-10 sm:mt-14 pl-8 sm:pl-16 text-[15px] sm:text-[17px] text-[var(--color-fg-dim)] max-w-2xl leading-relaxed">
+    {ui.hero_desc}
+  </p>
+</section>
+
+<section class="mb-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px]">
+  <span class="text-[var(--color-fg-mute)] font-medium shrink-0">{ui.filter_label}</span>
+  <button data-filter="all" class="filter-btn font-bold text-[var(--color-accent)]">
+    {ui.filter_all} <span class="text-[var(--color-fg-mute)] font-normal">({stations.length})</span>
+  </button>
+  {modelIndex.map(({ label, count }) => (
+    <button data-filter={label} class="filter-btn font-medium text-[var(--color-fg-dim)] hover:text-[var(--color-accent)] transition-colors">
+      {label} <span class="text-[var(--color-fg-mute)] font-normal">({count})</span>
+    </button>
+  ))}
+</section>
+
+<section
+  id="grid"
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+>
+  {stations.map(station => <StationCard station={station} lang={lang} />)}
+</section>
+
+<p id="empty" class="text-center text-[var(--color-fg-mute)] py-12 hidden">{ui.empty}</p>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('#grid > article');
+  const empty = document.getElementById('empty');
+
+  function apply(filter: string) {
+    let visible = 0;
+    cards.forEach(card => {
+      const models = (card.dataset.models || '').split('|');
+      const show = filter === 'all' || models.includes(filter);
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    if (empty) empty.classList.toggle('hidden', visible > 0);
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter!;
+      buttons.forEach(b => {
+        const active = b === btn;
+        b.classList.toggle('text-[var(--color-accent)]', active);
+        b.classList.toggle('font-bold', active);
+        b.classList.toggle('text-[var(--color-fg-dim)]', !active);
+        b.classList.toggle('font-medium', !active);
+      });
+      apply(filter);
+    });
+  });
+</script>

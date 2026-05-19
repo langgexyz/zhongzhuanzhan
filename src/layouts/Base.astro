@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import { t, type Lang, altLangPath, localizedPath } from '../lib/i18n';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  /** path WITHOUT the locale prefix, e.g. '/' or '/s/zhoupb/' */
+  path: string;
+  ogImage?: string;
+  jsonLd?: object;
+}
+
+const { title, description, lang, path, ogImage, jsonLd } = Astro.props;
+const ui = t(lang);
+
+const siteUrl = Astro.site?.href.replace(/\/$/, '') ?? '';
+const canonical = `${siteUrl}${localizedPath(lang, path)}`;
+const alt = altLangPath(lang, path);
+const altCanonical = `${siteUrl}${alt.href}`;
+const htmlLang = lang === 'zh-CN' ? 'zh-CN' : 'en';
+---
+
+<!doctype html>
+<html lang={htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="zh-CN" href={`${siteUrl}${localizedPath('zh-CN', path)}`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}${localizedPath('en', path)}`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}${localizedPath('zh-CN', path)}`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'zh-CN' ? 'zh_CN' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'zh-CN' ? 'en_US' : 'zh_CN'} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <meta name="robots" content="index,follow" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body class="min-h-screen">
+    <header class="sticky top-0 z-20 bg-[var(--color-bg)]/85 backdrop-blur-md border-b border-[var(--color-line)]/50">
+      <div class="max-w-5xl mx-auto px-6 sm:px-8 py-4 sm:py-5 flex items-center justify-between">
+        <a href={localizedPath(lang, '/')} class="flex items-baseline gap-2">
+          <span class="font-extrabold text-[18px] tracking-tight text-[var(--color-fg)]">{ui.brand_l}</span>
+          <span class="font-extrabold text-[18px] tracking-tight text-[var(--color-accent)]">{ui.brand_r}</span>
+        </a>
+        <nav class="flex items-center gap-5 sm:gap-6 text-[14px] font-medium text-[var(--color-fg-dim)]">
+          <a href={localizedPath(lang, '/')} class="hover:text-[var(--color-fg)]">{ui.nav_stations}</a>
+          <a href="https://github.com" target="_blank" rel="noopener" class="hover:text-[var(--color-fg)]">{ui.nav_submit}</a>
+          <a href={alt.href} hreflang={alt.lang} class="hover:text-[var(--color-accent)] text-[var(--color-fg-mute)]">
+            {ui.nav_lang_switch}
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 sm:px-8 pb-20">
+      <slot />
+    </main>
+
+    <footer class="mt-24 border-t border-[var(--color-line)]">
+      <div class="max-w-5xl mx-auto px-6 sm:px-8 py-6 text-[13px] text-[var(--color-fg-mute)] flex flex-col sm:flex-row gap-2 sm:justify-between">
+        <span>{ui.footer_disclaimer}</span>
+        <a href={alt.href} hreflang={alt.lang} class="hover:text-[var(--color-accent)]">{ui.nav_lang_switch}</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { t, type Lang, localizedPath, pickName, pickShort, pickPriceNote, pickPromo } from '../lib/i18n';
+
+interface Props {
+  station: CollectionEntry<'stations'>;
+  lang: Lang;
+}
+
+const { station, lang } = Astro.props;
+const d = station.data;
+const ui = t(lang);
+const { Content } = await render(station);
+
+const statusText: Record<typeof d.status, string> = {
+  active: ui.status_active,
+  unstable: ui.status_unstable,
+  down: ui.status_down,
+};
+const statusColor: Record<typeof d.status, string> = {
+  active: 'text-[var(--color-ok)]',
+  unstable: 'text-[var(--color-warn)]',
+  down: 'text-[var(--color-err)]',
+};
+const statusDot: Record<typeof d.status, string> = {
+  active: 'bg-[var(--color-ok)]',
+  unstable: 'bg-[var(--color-warn)]',
+  down: 'bg-[var(--color-err)]',
+};
+
+const name = pickName(d, lang);
+const short = pickShort(d, lang);
+const priceNote = pickPriceNote(d, lang);
+const promo = pickPromo(d, lang);
+
+const ctaHref = d.affiliate ?? d.url;
+const host = (() => { try { return new URL(d.url).host; } catch { return d.url; } })();
+const homePath = localizedPath(lang, '/');
+const showZhBody = lang === 'zh-CN';
+---
+
+<a href={homePath} class="inline-block text-[14px] text-[var(--color-fg-dim)] hover:text-[var(--color-accent)] font-medium mt-6">{ui.detail_back}</a>
+
+<header class="mt-8 mb-12">
+  <div class="flex items-center flex-wrap gap-2 text-[13px] font-medium mb-4">
+    <span class={`inline-block w-1.5 h-1.5 rounded-full ${statusDot[d.status]}`}></span>
+    <span class={statusColor[d.status]}>{statusText[d.status]}</span>
+    {d.since && <span class="text-[var(--color-fg-mute)]">· {ui.detail_since} {d.since}</span>}
+  </div>
+
+  <h1 class="text-[40px] sm:text-[56px] font-extrabold tracking-tight leading-[1.05] text-[var(--color-fg)]">
+    {name}
+  </h1>
+
+  <a href={d.url} target="_blank" rel="noopener" class="inline-block mt-3 text-[14px] text-[var(--color-fg-mute)] hover:text-[var(--color-accent)] font-mono">
+    {host} ↗
+  </a>
+
+  {short && <p class="mt-6 text-[18px] text-[var(--color-fg-dim)] leading-relaxed max-w-2xl">{short}</p>}
+
+  <div class="mt-8">
+    <a
+      href={ctaHref}
+      target="_blank"
+      rel="noopener nofollow"
+      class="inline-block text-[15px] font-bold text-white bg-[var(--color-accent)] hover:bg-[var(--color-accent-deep)] px-6 py-3 transition-colors"
+    >
+      {ui.detail_register}
+    </a>
+  </div>
+</header>
+
+<section class="mb-12">
+  <h2 class="text-[14px] font-bold tracking-wider uppercase text-[var(--color-fg-mute)] mb-4">{ui.detail_overview}</h2>
+  <div class="grid sm:grid-cols-2 gap-5">
+    {promo && (
+      <div class="bg-[var(--color-accent-soft)] border border-[var(--color-accent)] p-5">
+        <div class="text-[12px] text-[var(--color-accent-deep)] font-bold tracking-wider uppercase mb-2">{ui.detail_promo}</div>
+        <div class="text-[18px] font-bold text-[var(--color-fg)] leading-snug">{promo}</div>
+      </div>
+    )}
+    {priceNote && (
+      <div class="bg-[var(--color-bg-card)] border border-[var(--color-line)] p-5">
+        <div class="text-[12px] text-[var(--color-fg-mute)] font-bold tracking-wider uppercase mb-2">{ui.detail_price}</div>
+        <div class="text-[16px] text-[var(--color-fg)] leading-relaxed">{priceNote}</div>
+      </div>
+    )}
+    {d.contact && (
+      <div class="bg-[var(--color-bg-card)] border border-[var(--color-line)] p-5">
+        <div class="text-[12px] text-[var(--color-fg-mute)] font-bold tracking-wider uppercase mb-2">{ui.detail_contact}</div>
+        <div class="text-[15px] text-[var(--color-fg)] font-mono">{d.contact}</div>
+      </div>
+    )}
+  </div>
+</section>
+
+{d.models.length > 0 && (
+  <section class="mb-12">
+    <h2 class="text-[14px] font-bold tracking-wider uppercase text-[var(--color-fg-mute)] mb-4">{ui.detail_models}</h2>
+    <div class="flex flex-wrap gap-2">
+      {d.models.map(m => (
+        <span class="text-[13px] px-3 py-1.5 bg-[var(--color-bg-card)] border border-[var(--color-line)] text-[var(--color-fg)] font-mono">{m}</span>
+      ))}
+    </div>
+  </section>
+)}
+
+{showZhBody && (
+  <article class="prose-content max-w-2xl text-[16px] leading-relaxed text-[var(--color-fg-dim)]">
+    <Content />
+  </article>
+)}
+
+<style is:global>
+  .prose-content h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--color-fg);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .prose-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-fg);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-content p { margin-bottom: 1rem; }
+  .prose-content ul { list-style: disc; padding-left: 1.25rem; margin-bottom: 1rem; }
+  .prose-content li { margin-bottom: 0.35rem; }
+  .prose-content strong { color: var(--color-fg); font-weight: 700; }
+  .prose-content code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-bg-elev);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    color: var(--color-accent-deep);
+  }
+  .prose-content a { color: var(--color-accent); text-decoration: underline; }
+</style>

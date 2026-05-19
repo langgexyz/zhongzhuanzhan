@@ -132,3 +132,7 @@ export function pickPromo(d: StationLocalizable, lang: Lang): string | undefined
   if (lang === 'en') return d.promo_en ?? d.promo_zh;
   return d.promo_zh ?? d.promo_en;
 }
+
+export function formatSupportedCount(lang: Lang, n: number): string {
+  return lang === 'zh-CN' ? `${n} 家支持` : `${n} supported`;
+}

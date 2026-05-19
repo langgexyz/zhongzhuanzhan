@@ -1,67 +1,49 @@
 import type { Lang } from './i18n';
 
-const IMAGE_TOKEN = '__image_gpt__';
-
 /**
- * Map of raw model id → canonical display label.
- * Multiple raw ids can map to the same label (e.g. gpt-5.5 + gpt-5.5-pro → "GPT-5.5").
- * Unknown ids fall through to themselves.
+ * Map of raw model id → canonical family label.
+ * Multiple raw ids collapse to the same family (e.g. gpt-5.5, gpt-5.4-mini, gpt-5-codex → "GPT").
+ * Unknown ids fall through to their raw id (so new models still appear instead of being hidden).
  */
-const MODEL_LABELS: Record<string, string> = {
-  // OpenAI GPT
-  'gpt-5.5': 'GPT-5.5',
-  'gpt-5.5-pro': 'GPT-5.5',
-  'gpt-5.4': 'GPT-5.4',
-  'gpt-5.4-pro': 'GPT-5.4',
-  'gpt-5.4-mini': 'GPT-5.4 mini',
-  'gpt-5.3-codex': 'Codex',
-  'gpt-5.3-codex-spark': 'Codex',
-  'gpt-5-codex': 'Codex',
-  'gpt-5.2': 'GPT-5.2',
-  'gpt-5': 'GPT-5',
-  'gpt-4o': 'GPT-4o',
-  'gpt-4o-mini': 'GPT-4o mini',
+const FAMILY_RULES: Array<{ test: RegExp; family: string }> = [
+  { test: /^claude/i, family: 'Claude' },
+  { test: /^gpt-image/i, family: 'Image' },
+  { test: /^gpt|^codex|^o\d/i, family: 'GPT' },
+  { test: /^gemini/i, family: 'Gemini' },
+  { test: /^deepseek/i, family: 'DeepSeek' },
+  { test: /^kimi/i, family: 'Kimi' },
+  { test: /^glm/i, family: 'GLM' },
+  { test: /^qwen/i, family: 'Qwen' },
+  { test: /^minimax/i, family: 'MiniMax' },
+  { test: /^grok/i, family: 'Grok' },
+  { test: /^llama/i, family: 'Llama' },
+  { test: /^mistral/i, family: 'Mistral' },
+];
 
-  // Anthropic Claude
-  'claude-opus-4-7': 'Opus 4.7',
-  'claude-opus-4-6': 'Opus 4.6',
-  'claude-sonnet-4-7': 'Sonnet 4.7',
-  'claude-sonnet-4-6': 'Sonnet 4.6',
-  'claude-sonnet-4-5': 'Sonnet 4.5',
-  'claude-haiku-4-5': 'Haiku 4.5',
+export interface FamilyBrand {
+  letter: string;
+  bg: string;
+  fg: string;
+}
 
-  // Google Gemini
-  'gemini-3.1-pro-preview': 'Gemini 3.1',
-  'gemini-3-pro-preview': 'Gemini 3',
-  'gemini-2.5-pro': 'Gemini 2.5',
-
-  // DeepSeek
-  'deepseek-v4-pro': 'DeepSeek V4',
-  'deepseek-v4-flash': 'DeepSeek V4',
-  'deepseek-v4-flash-h': 'DeepSeek V4',
-  'deepseek-v4-flash-l': 'DeepSeek V4',
-  'deepseek-v4': 'DeepSeek V4',
-  'deepseek-v3': 'DeepSeek V3',
-
-  // Others
-  'kimi-k2.6': 'Kimi K2.6',
-  'kimi-k2': 'Kimi K2',
-  'glm5.1': 'GLM 5.1',
-  'glm-4.5': 'GLM 4.5',
-  'Qwen3.6-35B-A3B': 'Qwen 3.6',
-  'qwen3-coder': 'Qwen3 Coder',
-  'minimax-m2.7': 'MiniMax M2.7',
-
-  // Image gen — localized at render time
-  'gpt-image-1': IMAGE_TOKEN,
-  'gpt-image-1.5': IMAGE_TOKEN,
-  'gpt-image-2': IMAGE_TOKEN,
+export const FAMILY_BRANDS: Record<string, FamilyBrand> = {
+  Claude:   { letter: 'C',  bg: '#d97757', fg: '#ffffff' },
+  GPT:      { letter: 'G',  bg: '#10a37f', fg: '#ffffff' },
+  Gemini:   { letter: 'G',  bg: '#4285f4', fg: '#ffffff' },
+  DeepSeek: { letter: 'D',  bg: '#4d6bfe', fg: '#ffffff' },
+  Kimi:     { letter: 'K',  bg: '#6366f1', fg: '#ffffff' },
+  GLM:      { letter: 'GLM',bg: '#0ea5e9', fg: '#ffffff' },
+  Qwen:     { letter: 'Q',  bg: '#ee7c46', fg: '#ffffff' },
+  MiniMax:  { letter: 'M',  bg: '#7c3aed', fg: '#ffffff' },
+  Image:    { letter: 'I',  bg: '#475569', fg: '#ffffff' },
+  Grok:     { letter: 'X',  bg: '#1d1d1f', fg: '#ffffff' },
+  Llama:    { letter: 'L',  bg: '#2563eb', fg: '#ffffff' },
+  Mistral:  { letter: 'M',  bg: '#ff7000', fg: '#ffffff' },
 };
 
-export function normalizeModel(raw: string, lang: Lang = 'zh-CN'): string {
-  const label = MODEL_LABELS[raw];
-  if (label === IMAGE_TOKEN) return lang === 'en' ? 'Image (GPT)' : '图像 (GPT)';
-  return label ?? raw;
+export function normalizeModel(raw: string, _lang: Lang = 'zh-CN'): string {
+  for (const r of FAMILY_RULES) if (r.test.test(raw)) return r.family;
+  return raw;
 }
 
 export function stationModelLabels(models: string[], lang: Lang): string[] {
@@ -80,9 +62,11 @@ interface StationLike {
 }
 
 /**
- * Build sorted list of model labels with the count of stations supporting each.
- * Sort: count desc, then alphabetical.
+ * Build sorted list of family labels with the count of stations supporting each.
+ * Sort: count desc, then a stable family order (Claude / GPT / Gemini first).
  */
+const FAMILY_ORDER = ['Claude', 'GPT', 'Gemini', 'DeepSeek', 'Kimi', 'Qwen', 'GLM', 'MiniMax', 'Grok', 'Llama', 'Mistral', 'Image'];
+
 export function buildModelIndex(stations: StationLike[], lang: Lang): ModelCount[] {
   const counts = new Map<string, number>();
   for (const s of stations) {
@@ -91,5 +75,11 @@ export function buildModelIndex(stations: StationLike[], lang: Lang): ModelCount
   }
   return Array.from(counts.entries())
     .map(([label, count]) => ({ label, count }))
-    .sort((a, b) => (b.count - a.count) || a.label.localeCompare(b.label));
+    .sort((a, b) => {
+      if (b.count !== a.count) return b.count - a.count;
+      const ia = FAMILY_ORDER.indexOf(a.label);
+      const ib = FAMILY_ORDER.indexOf(b.label);
+      if (ia !== -1 || ib !== -1) return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+      return a.label.localeCompare(b.label);
+    });
 }

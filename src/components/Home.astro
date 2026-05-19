@@ -1,7 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import StationCard from './StationCard.astro';
-import { t, type Lang } from '../lib/i18n';
+import FamilyBadge from './FamilyBadge.astro';
+import { t, type Lang, formatSupportedCount } from '../lib/i18n';
 import { buildModelIndex } from '../lib/model-labels';
 
 interface Props {
@@ -39,16 +40,24 @@ const modelIndex = buildModelIndex(stations, lang);
   </p>
 </section>
 
-<section class="mb-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-[14px]">
-  <span class="text-[var(--color-fg-mute)] font-medium shrink-0">{ui.filter_label}</span>
-  <button data-filter="all" class="filter-btn font-bold text-[var(--color-accent)]">
-    {ui.filter_all} <span class="text-[var(--color-fg-mute)] font-normal">({stations.length})</span>
-  </button>
-  {modelIndex.map(({ label, count }) => (
-    <button data-filter={label} class="filter-btn font-medium text-[var(--color-fg-dim)] hover:text-[var(--color-accent)] transition-colors">
-      {label} <span class="text-[var(--color-fg-mute)] font-normal">({count})</span>
+<section class="mb-8">
+  <div class="flex items-baseline gap-3 mb-3">
+    <span class="text-[13px] text-[var(--color-fg-mute)] font-medium">{ui.filter_label}</span>
+  </div>
+  <div class="flex flex-wrap gap-2.5 items-center">
+    <button data-filter="all" class="filter-btn inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-[var(--color-accent)] text-white border-2 border-[var(--color-accent)] transition-all">
+      <span class="text-[14px] font-bold">{ui.filter_all}</span>
+      <span class="text-[11px] font-medium text-white/80 bg-white/15 px-2 py-0.5 rounded-md">{stations.length}</span>
     </button>
-  ))}
+    {modelIndex.map(({ label, count }) => (
+      <button
+        data-filter={label}
+        class="filter-btn family-btn"
+      >
+        <FamilyBadge family={label} count={count} countLabel={formatSupportedCount(lang, count)} interactive={true} />
+      </button>
+    ))}
+  </div>
 </section>
 
 <section
@@ -60,8 +69,24 @@ const modelIndex = buildModelIndex(stations, lang);
 
 <p id="empty" class="text-center text-[var(--color-fg-mute)] py-12 hidden">{ui.empty}</p>
 
+<style>
+  .family-btn {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .family-btn[data-active="true"] :global(.inline-flex) {
+    border-color: var(--color-accent) !important;
+    border-width: 2px !important;
+    box-shadow: 0 2px 12px rgba(204, 120, 92, 0.18);
+  }
+</style>
+
 <script>
-  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const allBtn = document.querySelector<HTMLButtonElement>('.filter-btn[data-filter="all"]');
+  const familyBtns = document.querySelectorAll<HTMLButtonElement>('.family-btn');
   const cards = document.querySelectorAll<HTMLElement>('#grid > article');
   const empty = document.getElementById('empty');
 
@@ -76,17 +101,21 @@ const modelIndex = buildModelIndex(stations, lang);
     if (empty) empty.classList.toggle('hidden', visible > 0);
   }
 
-  buttons.forEach(btn => {
+  function setActive(active: HTMLButtonElement) {
+    if (allBtn) {
+      const isAll = active === allBtn;
+      allBtn.classList.toggle('bg-[var(--color-accent)]', isAll);
+      allBtn.classList.toggle('text-white', isAll);
+      allBtn.classList.toggle('bg-white', !isAll);
+      allBtn.classList.toggle('text-[var(--color-fg)]', !isAll);
+    }
+    familyBtns.forEach(b => b.dataset.active = b === active ? 'true' : 'false');
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter!;
-      buttons.forEach(b => {
-        const active = b === btn;
-        b.classList.toggle('text-[var(--color-accent)]', active);
-        b.classList.toggle('font-bold', active);
-        b.classList.toggle('text-[var(--color-fg-dim)]', !active);
-        b.classList.toggle('font-medium', !active);
-      });
-      apply(filter);
+      setActive(btn);
+      apply(btn.dataset.filter!);
     });
   });
 </script>

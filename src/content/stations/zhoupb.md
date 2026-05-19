@@ -13,34 +13,68 @@ models:
   - gpt-image-1
   - gpt-image-1.5
   - gpt-image-2
+  - claude-opus-4-7
+  - claude-opus-4-6
+  - claude-opus-4-6-thinking
+  - claude-opus-4-5-thinking
+  - claude-sonnet-4-6
+  - claude-sonnet-4-5
+  - claude-sonnet-4-5-thinking
+  - gemini-3.1-pro-high
+  - gemini-3.1-pro-low
+  - gemini-3-pro-high
+  - gemini-3-pro-low
+  - gemini-3-pro-preview
+  - gemini-3-pro-image
+  - gemini-3-flash
+  - gemini-3.1-flash-image
+  - gemini-3.1-flash-image-preview
+  - gemini-2.5-flash
+  - gemini-2.5-flash-thinking
+  - gemini-2.5-flash-lite
+  - gemini-2.5-flash-image
+  - gemini-2.5-flash-image-preview
 priceNote_zh: 按号池倍率计费；具体 ¥/M tokens 需管理员分配订阅后可见
 priceNote_en: Priced by channel-pool multiplier; concrete ¥/M tokens visible only after admin assigns a subscription
 promo_zh: 注册即送 $5 体验额度（邮箱密码即可，0 验证）
 promo_en: $5 free credit on sign-up (email + password, no verification)
-short_zh: 基于 sub2api 的中转站，模型清单覆盖 GPT-5 系列与 Image 系列，OpenAI 兼容协议。
-short_en: A sub2api-based relay covering the GPT-5 series and Image series with an OpenAI-compatible API.
-tags: [codex-cli, cursor, gpt-5, codex]
+short_zh: 基于 sub2api 的中转站，覆盖 GPT-5 系列、Claude 4.x（Opus / Sonnet / Thinking）、Gemini 2.5 / 3 / 3.1 系列与 OpenAI Image，多协议（OpenAI / Anthropic / Gemini / Antigravity）。
+short_en: A sub2api-based relay covering the GPT-5 series, Claude 4.x (Opus / Sonnet / Thinking), Gemini 2.5 / 3 / 3.1 and OpenAI Image, across OpenAI / Anthropic / Gemini / Antigravity protocols.
+tags: [claude-code, codex-cli, cursor, claude, gpt-5, codex, gemini, antigravity]
 status: active
 since: 2024-09
 featured: true
 billing: payg
 prices_zh:
-  GPT: 注册送 $5；CodeX 号池 0.6× 倍率，标准号池 1.0×
+  GPT: 注册送 $5；CodeX 号池 0.6× 倍率（按量），标准号池 1.0×
+  Claude: 走 Antigravity 协议，号池由管理员分配
+  Gemini: 走 Antigravity 协议，号池由管理员分配
 prices_en:
-  GPT: $5 free credit; CodeX pool 0.6×, standard pool 1.0×
+  GPT: $5 free credit; CodeX pool 0.6×, standard pool 1.0× (PAYG)
+  Claude: via Antigravity protocol; group admin-assigned
+  Gemini: via Antigravity protocol; group admin-assigned
 ---
 
 ## 接入方式
 
-- 协议：OpenAI 兼容
-- Endpoint：`/v1/chat/completions`、`/v1/models`
-- 鉴权：`Authorization: Bearer <key>`
+多协议，按调用客户端选择：
 
-## 支持模型
+| 协议 | 端点 | 鉴权 |
+|---|---|---|
+| OpenAI | `/v1/chat/completions`、`/v1/models` | `Authorization: Bearer` |
+| Anthropic（Claude Code 用） | `/v1/messages` | `x-api-key` + `anthropic-version: 2023-06-01` |
+| Gemini | `/v1beta/...` | `x-goog-api-key` |
+| Antigravity（多家族聚合） | `/antigravity/v1/models`、`/antigravity/v1beta/...` | `Authorization: Bearer` |
 
-文本：GPT-5.5 / 5.4 / 5.4-mini / 5.3-codex / 5.3-codex-spark / 5.2
+> 注：每个 API key 实际可用的模型 = 用户被管理员分配进哪个号池。OpenAI 号池里调 `/v1/messages` 会拿到 404；调 Claude 需要被分到 Anthropic 平台号池。
 
-图像：gpt-image-1 / 1.5 / 2
+## 支持模型（按家族）
+
+**GPT (9)**：GPT-5.5 / 5.4 / 5.4-mini / 5.3-codex / 5.3-codex-spark / 5.2 + gpt-image-1 / 1.5 / 2
+
+**Claude (7)**：Opus 4.7 / 4.6 / 4.6-thinking / 4.5-thinking · Sonnet 4.6 / 4.5 / 4.5-thinking
+
+**Gemini (14)**：3.1-pro-high / 3.1-pro-low · 3-pro-high / 3-pro-low / 3-pro-preview / 3-pro-image · 3-flash · 3.1-flash-image / 3.1-flash-image-preview · 2.5-flash / 2.5-flash-thinking / 2.5-flash-lite / 2.5-flash-image / 2.5-flash-image-preview
 
 ## 计费 / 号池
 

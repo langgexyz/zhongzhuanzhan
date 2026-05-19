@@ -1,6 +1,6 @@
 ---
-name: close-AI
-name_en: close-AI
+name: zhoupb.com
+name_en: zhoupb.com
 url: https://sub2api.zhoupb.com/
 affiliate: https://sub2api.zhoupb.com/
 models:
@@ -35,8 +35,8 @@ models:
   - gemini-2.5-flash-image
   - gemini-2.5-flash-image-preview
 protocols: [OpenAI, Anthropic, Gemini, Antigravity]
-priceNote_zh: 按号池倍率计费；具体 ¥/M tokens 需管理员分配订阅后可见
-priceNote_en: Priced by channel-pool multiplier; concrete ¥/M tokens visible only after admin assigns a subscription
+priceNote_zh: 价格视所属号池，需注册后查看
+priceNote_en: Pricing depends on assigned channel pool; visible after sign-up
 promo_zh: 注册即送 $5 体验额度（邮箱密码即可，0 验证）
 promo_en: $5 free credit on sign-up (email + password, no verification)
 short_zh: 基于 sub2api 的中转站，覆盖 GPT-5 系列、Claude 4.x（Opus / Sonnet / Thinking）、Gemini 2.5 / 3 / 3.1 系列与 OpenAI Image，多协议（OpenAI / Anthropic / Gemini / Antigravity）。

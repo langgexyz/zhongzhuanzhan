@@ -1,8 +1,7 @@
 ---
-name: LToken
-name_en: LToken
+name: ltoken.shop
+name_en: ltoken.shop
 url: https://api.ltoken.shop/
-affiliate: https://api.ltoken.shop/register?aff=KxLH
 models:
   - claude-opus-4-7
   - claude-opus-4-7-thinking
@@ -31,8 +30,8 @@ models:
   - qwen/qwen3-coder-480b-a35b-instruct
   - free-model
 protocols: [OpenAI, Anthropic]
-priceNote_zh: 混合计费 — Claude 按次（站方公告 sonnet 约 ¥0.02/次），其余按 token ratio；近期 GPT 已降价至原 85%、Claude 多轮降价至五折后再 50%
-priceNote_en: Hybrid billing — Claude per-request (~¥0.02/req for sonnet per announcements), others by token ratio. Recent discounts — GPT down to 85%, Claude reduced repeatedly (down to ~50% × 50%)
+priceNote_zh: Claude 按次约 ¥0.02/次起，其余按 token ratio
+priceNote_en: Claude per-request from ¥0.02/req, others by token ratio
 promo_zh: 近期连续降价 — GPT 至原 85%、Claude 五折后再 50%（约 ¥0.02/次起）
 promo_en: Active discount stack — GPT to 85% of previous prices; Claude reduced repeatedly to ~50% × 50% (from ~¥0.02/req)
 short_zh: 基于 new-api 的中转站，28 个模型覆盖 Claude 4.x（含 thinking）、GPT-5 / gpt-oss、Gemini 3 / 3.1、DeepSeek V4、Kimi K2.5、MiniMax M2.5、GLM 4.5–5.1、Qwen 3.x–3.6。Claude 按次计费。

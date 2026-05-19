@@ -1,6 +1,6 @@
 ---
-name: YunServer API
-name_en: YunServer API
+name: yunserver.cn
+name_en: yunserver.cn
 url: https://api.yunserver.cn/
 affiliate: https://api.yunserver.cn/
 models:
@@ -21,8 +21,8 @@ models:
   - minimax-m2.7
   - gpt-image-2
 protocols: [OpenAI, Anthropic, Gemini]
-priceNote_zh: CNY 计费，GPT-5.5 ¥0.8 / 百万 tokens 起，GPT-5.4 ¥1.3 / 百万 tokens 起（2026-05-15 起）
-priceNote_en: Priced in CNY. GPT-5.5 from ¥0.8 / 1M tokens, GPT-5.4 from ¥1.3 / 1M tokens (effective 2026-05-15)
+priceNote_zh: GPT-5.4 低至 ¥0.8 / M tokens 起
+priceNote_en: GPT-5.4 from ¥0.8 / M tokens
 short_zh: 基于 New API 的中转站，模型清单覆盖 GPT-5 系列、Claude 4、Gemini 3、DeepSeek V4、Kimi K2 等多个家族，OpenAI 兼容协议，CNY 计费。
 short_en: A New-API-based relay covering GPT-5 series, Claude 4, Gemini 3, DeepSeek V4, Kimi K2 and more model families with an OpenAI-compatible API. Billed in CNY.
 tags: [claude-code, codex-cli, cursor, claude, gpt-5, codex, gemini, deepseek, kimi]

@@ -4,22 +4,28 @@ name_en: yunserver.cn
 url: https://api.yunserver.cn/
 affiliate: https://api.yunserver.cn/
 models:
+  - claude-opus-4-7
+  - claude-opus-4-6
+  - Claude混合版
   - gpt-5.5
   - gpt-5.5-pro
   - gpt-5.4
   - gpt-5.4-pro
+  - gpt-5.4-mini
   - gpt-5.3-codex
-  - claude-opus-4-7
-  - claude-opus-4-6
+  - gpt-5.3-codex-spark
+  - gpt-5.2
+  - gpt-image-2
   - gemini-3.1-pro-preview
   - gemini-3-pro-preview
   - deepseek-v4-pro
   - deepseek-v4-flash
+  - deepseek-v4-flash-h
+  - deepseek-v4-flash-l
   - kimi-k2.6
   - glm5.1
   - Qwen3.6-35B-A3B
   - minimax-m2.7
-  - gpt-image-2
 protocols: [OpenAI, Anthropic, Gemini]
 priceNote_zh: GPT-5.4 低至 ¥0.8 / M tokens 起
 priceNote_en: GPT-5.4 from ¥0.8 / M tokens

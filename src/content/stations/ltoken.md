@@ -4,11 +4,9 @@ name_en: ltoken.shop
 url: https://api.ltoken.shop/
 models:
   - claude-opus-4-7
-  - claude-opus-4-7-thinking
   - claude-opus-4-6
-  - claude-opus-4-6-thinking
-  - claude-sonnet-4-6
-  - claude-sonnet-4-6-thinking
+  - gpt-5.5
+  - gpt-5.4
   - gpt-5.4-mini
   - gpt-5.3-codex
   - gpt-5.2
@@ -19,16 +17,16 @@ models:
   - gemini-3-flash-preview
   - deepseek-v4-flash
   - moonshotai/kimi-k2.5
+  - kimi-k2.5
   - minimax-m2.5
   - z-ai/glm5.1
   - z-ai/glm5
   - z-ai/glm4.7
   - z-ai/glm4.5-air
-  - qwen3.6-plus
+  - qwen3.5-plus
   - qwen/qwen3.5-122b-a10b
   - qwen/qwen3.5-397b-a17b
   - qwen/qwen3-coder-480b-a35b-instruct
-  - free-model
 protocols: [OpenAI, Anthropic]
 priceNote_zh: Claude 按次约 ¥0.02/次起，其余按 token ratio
 priceNote_en: Claude per-request from ¥0.02/req, others by token ratio

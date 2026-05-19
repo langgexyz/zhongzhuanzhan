@@ -22,6 +22,19 @@ models:
   - gpt-5.2
   - gemini-3.1-pro
   - gemini-3.1
+  - gemini-3.1-flash-image-preview
+  - gemini-3.1-flash-image-preview-2k
+  - gemini-3.1-flash-image-preview-4k
+  - gemini-3.1-flash-image-preview-1x1-2k
+  - gemini-3.1-flash-image-preview-1x1-4k
+  - gemini-3.1-flash-image-preview-3x4-2k
+  - gemini-3.1-flash-image-preview-3x4-4k
+  - gemini-3.1-flash-image-preview-4x3-2k
+  - gemini-3.1-flash-image-preview-4x3-4k
+  - gemini-3.1-flash-image-preview-9x16-2k
+  - gemini-3.1-flash-image-preview-9x16-4k
+  - gemini-3.1-flash-image-preview-16x9-2k
+  - gemini-3.1-flash-image-preview-16x9-4k
   - deepseek-v4-pro
   - deepseek-v4-flash
   - grok-4.20-fast
@@ -31,6 +44,8 @@ models:
 protocols: [OpenAI, Anthropic, Gemini]
 priceNote_zh: 价格视所属号池，需注册后查看
 priceNote_en: Pricing depends on assigned channel pool; visible after sign-up
+promo_zh: codex 池 0.15× · 限时 claude / DeepSeek 0.88× 倍率
+promo_en: codex pool 0.15× · 限时 claude / DeepSeek 0.88× rate
 short_zh: 基于 new-api v1.0.0-rc.4 的中转站，主打 Claude 4.x 系列（Opus / Sonnet / Haiku 4.5 / 4.6 / 4.7，含 1m context 与 fast 变体），并覆盖 GPT-5 系列、Gemini 3.1、DeepSeek V4、Grok 4.20 与图像模型。
 short_en: A new-api v1.0.0-rc.4 based relay focusing on the Claude 4.x family (Opus / Sonnet / Haiku 4.5 / 4.6 / 4.7, including 1m-context and fast variants), with additional coverage of GPT-5, Gemini 3.1, DeepSeek V4, Grok 4.20 and image models.
 tags: [claude-code, claude, codex-cli, codex, cursor, gpt-5, gemini, deepseek, grok]

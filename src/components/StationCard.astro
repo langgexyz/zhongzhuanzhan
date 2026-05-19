@@ -24,6 +24,34 @@ const promo = pickPromo(d, lang);
 const ctaHref = d.affiliate ?? d.url;
 const modelLabels = stationModelLabels(d.models);
 const modelsCount = d.models.length;
+
+function pickFlagshipModels(models: string[]): string[] {
+  const orderedFamilies: Array<{ key: string; test: (m: string) => boolean }> = [
+    { key: 'claude', test: m => m.toLowerCase().startsWith('claude') },
+    { key: 'gpt', test: m => /^(gpt|openai\/|o\d)/i.test(m) || m.toLowerCase().includes('codex') },
+    { key: 'gemini', test: m => m.toLowerCase().startsWith('gemini') },
+  ];
+  const picks: string[] = [];
+  for (const { test } of orderedFamilies) {
+    const match = models.find(test);
+    if (match) picks.push(match);
+  }
+  return picks;
+}
+const flagshipModels = pickFlagshipModels(d.models);
+
+const CLIENT_TAG_LABELS: Record<string, string> = {
+  'claude-code': 'Claude Code',
+  'codex-cli': 'Codex CLI',
+  'cursor': 'Cursor',
+  'cherry-studio': 'Cherry Studio',
+  'lobe-chat': 'Lobe Chat',
+  'cc-switch': 'CC Switch',
+  'aionui': 'AionUI',
+};
+const clientTags = d.tags
+  .filter(t => t in CLIENT_TAG_LABELS)
+  .map(t => CLIENT_TAG_LABELS[t]);
 ---
 
 <article
@@ -60,11 +88,21 @@ const modelsCount = d.models.length;
       )}
     </div>
 
-    {d.protocols.length > 0 && (
-      <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-bold">
-        {d.protocols.map(p => (
+    {flagshipModels.length > 0 && (
+      <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-mono">
+        {flagshipModels.map(m => (
           <span class="inline-block px-2 py-0.5 rounded border border-[var(--color-line)] text-[var(--color-fg-dim)]">
-            {p}
+            {m}
+          </span>
+        ))}
+      </div>
+    )}
+
+    {clientTags.length > 0 && (
+      <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-medium">
+        {clientTags.map(c => (
+          <span class="inline-block px-2 py-0.5 rounded bg-[var(--color-accent-soft)] text-[var(--color-accent-deep)]">
+            {c}
           </span>
         ))}
       </div>

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zhongzhuanzhan.example.com/sitemap-index.xml
+Sitemap: https://zhongzhuanzhan.site/sitemap-index.xml

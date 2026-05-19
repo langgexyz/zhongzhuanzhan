@@ -61,7 +61,7 @@ const htmlLang = lang === 'zh-CN' ? 'zh-CN' : 'en';
         </a>
         <nav class="flex items-center gap-5 sm:gap-6 text-[14px] font-medium text-[var(--color-fg-dim)]">
           <a href={localizedPath(lang, '/')} class="hover:text-[var(--color-fg)]">{ui.nav_stations}</a>
-          <a href="https://github.com" target="_blank" rel="noopener" class="hover:text-[var(--color-fg)]">{ui.nav_submit}</a>
+          <a href={`mailto:findyu001@gmail.com?subject=${encodeURIComponent(ui.nav_submit_subject)}&body=${encodeURIComponent(ui.nav_submit_body)}`} class="hover:text-[var(--color-fg)]">{ui.nav_submit}</a>
           <a href={alt.href} hreflang={alt.lang} class="hover:text-[var(--color-accent)] text-[var(--color-fg-mute)]">
             {ui.nav_lang_switch}
           </a>

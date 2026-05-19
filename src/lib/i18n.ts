@@ -14,6 +14,21 @@ export const ui = {
     meta_title_suffix: '· 中转站',
     nav_stations: '全部',
     nav_submit: '提交收录',
+    nav_submit_subject: '提交中转站收录',
+    nav_submit_body: `请按以下字段填写（带 * 必填）：
+
+* 站点名称：
+* 站点 URL：
+* 主要模型（如 Claude / GPT / Gemini）：
+* 计费方式（按量付费 / 订阅制 / 混合）：
+* 一句话介绍：
+价格说明（可选）：
+优惠活动（可选）：
+联系方式（可选）：
+上线时间（可选）：
+
+补充说明：
+`,
     nav_lang_switch: 'English',
     hero_q_pre: 'Claude / Codex / Gemini 中转站',
     hero_q_emph: '全集',
@@ -45,6 +60,21 @@ export const ui = {
     meta_title_suffix: '· Relay Stations',
     nav_stations: 'Stations',
     nav_submit: 'Submit',
+    nav_submit_subject: 'Submit a relay station',
+    nav_submit_body: `Please fill in the following fields (* required):
+
+* Station name:
+* Station URL:
+* Main models (e.g. Claude / GPT / Gemini):
+* Billing (pay-as-you-go / subscription / hybrid):
+* One-line description:
+Pricing notes (optional):
+Promotion (optional):
+Contact (optional):
+Online since (optional):
+
+Additional notes:
+`,
     nav_lang_switch: '中文',
     hero_q_pre: 'The ',
     hero_q_emph: 'full index',

@@ -22,7 +22,7 @@ const jsonLd = {
     itemListElement: stations.map((s, idx) => ({
       '@type': 'ListItem',
       position: idx + 1,
-      url: `${siteUrl}/s/${s.id}/`,
+      url: s.data.url,
       name: s.data.name,
     })),
   },

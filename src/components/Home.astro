@@ -16,26 +16,17 @@ const stations: CollectionEntry<'stations'>[] = await getCollection('stations');
 
 stations.sort((a, b) => {
   if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
-  const order = { active: 0, unstable: 1, down: 2 } as const;
-  if (order[a.data.status] !== order[b.data.status]) return order[a.data.status] - order[b.data.status];
   return a.data.name.localeCompare(b.data.name);
 });
 
 const modelIndex = buildModelIndex(stations);
 ---
 
-<section class="pt-10 sm:pt-16 pb-12 sm:pb-16">
-  <div class="relative max-w-3xl">
-    <span aria-hidden="true" class="absolute -top-4 -left-1 sm:-top-8 sm:-left-6 text-[72px] sm:text-[120px] leading-none font-extrabold text-[var(--color-accent)] select-none pointer-events-none">&ldquo;</span>
-
-    <h1 class="relative pl-8 sm:pl-16 pr-6 sm:pr-12 text-[36px] sm:text-[56px] font-extrabold tracking-tight leading-[1.12] text-[var(--color-fg)]">
-      {ui.hero_q_pre}<span class="text-[var(--color-accent)] whitespace-nowrap">{ui.hero_q_emph}</span>{ui.hero_q_post}
-    </h1>
-
-    <span aria-hidden="true" class="absolute right-0 sm:-right-2 text-[72px] sm:text-[120px] leading-none font-extrabold text-[var(--color-accent)] select-none pointer-events-none" style="top: calc(100% - 0.55em);">&rdquo;</span>
-  </div>
-
-  <p class="mt-10 sm:mt-14 pl-8 sm:pl-16 text-[15px] sm:text-[17px] text-[var(--color-fg-dim)] max-w-2xl leading-relaxed">
+<section class="pt-6 sm:pt-8 pb-4 sm:pb-6 max-w-3xl">
+  <h1 class="text-[22px] sm:text-[28px] font-extrabold tracking-tight leading-[1.2] text-[var(--color-fg)]">
+    {ui.hero_q_pre}<span class="text-[var(--color-accent)] whitespace-nowrap">{ui.hero_q_emph}</span>{ui.hero_q_post}
+  </h1>
+  <p class="mt-2 text-[13px] sm:text-[14px] text-[var(--color-fg-mute)] leading-relaxed">
     {ui.hero_desc}
   </p>
 </section>

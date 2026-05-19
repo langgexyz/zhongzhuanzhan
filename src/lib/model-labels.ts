@@ -2,7 +2,7 @@
  * The site only covers families that need a relay for users in CN:
  * Claude / GPT / Gemini. Models from other families (DeepSeek, Kimi, Qwen,
  * GLM, MiniMax, image-gen, ...) are intentionally dropped — those upstreams
- * are reachable directly and don't motivate visiting a relay directory.
+ * are reachable directly and don't motivate visiting a relay station listing.
  */
 export const ALLOWED_FAMILIES = ['Claude', 'GPT', 'Gemini'] as const;
 export type AllowedFamily = typeof ALLOWED_FAMILIES[number];

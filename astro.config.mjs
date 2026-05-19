@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://relay-directory.example.com',
+  site: 'https://zhongzhuanzhan.example.com',
   trailingSlash: 'always',
   i18n: {
     defaultLocale: 'zh-CN',

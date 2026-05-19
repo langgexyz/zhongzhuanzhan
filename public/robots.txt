@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://relay-directory.example.com/sitemap-index.xml
+Sitemap: https://zhongzhuanzhan.example.com/sitemap-index.xml

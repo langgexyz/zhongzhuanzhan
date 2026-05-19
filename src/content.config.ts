@@ -10,6 +10,7 @@ const stations = defineCollection({
     affiliate: z.string().url().optional(),
     logo: z.string().optional(),
     models: z.array(z.string()).default([]),
+    protocols: z.array(z.string()).default([]),
     priceNote_zh: z.string().optional(),
     priceNote_en: z.string().optional(),
     promo_zh: z.string().optional(),

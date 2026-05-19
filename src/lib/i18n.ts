@@ -117,8 +117,6 @@ export function altLangPath(currentLang: Lang, path: string): { lang: Lang; href
 interface StationLocalizable {
   name: string;
   name_en?: string;
-  short_zh?: string;
-  short_en?: string;
   priceNote_zh?: string;
   priceNote_en?: string;
   promo_zh?: string;
@@ -128,11 +126,6 @@ interface StationLocalizable {
 export function pickName(d: StationLocalizable, lang: Lang): string {
   if (lang === 'en' && d.name_en) return d.name_en;
   return d.name;
-}
-
-export function pickShort(d: StationLocalizable, lang: Lang): string | undefined {
-  if (lang === 'en') return d.short_en ?? d.short_zh;
-  return d.short_zh ?? d.short_en;
 }
 
 export function pickPriceNote(d: StationLocalizable, lang: Lang): string | undefined {

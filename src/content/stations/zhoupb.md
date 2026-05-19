@@ -39,8 +39,6 @@ priceNote_zh: 价格视所属号池，需注册后查看
 priceNote_en: Pricing depends on assigned channel pool; visible after sign-up
 promo_zh: Codex 满血号池 0.6× 倍率
 promo_en: Codex 满血 channel pool 0.6× rate
-short_zh: 基于 sub2api 的中转站，覆盖 GPT-5 系列、Claude 4.x（Opus / Sonnet / Thinking）、Gemini 2.5 / 3 / 3.1 系列与 OpenAI Image，多协议（OpenAI / Anthropic / Gemini / Antigravity）。
-short_en: A sub2api-based relay covering the GPT-5 series, Claude 4.x (Opus / Sonnet / Thinking), Gemini 2.5 / 3 / 3.1 and OpenAI Image, across OpenAI / Anthropic / Gemini / Antigravity protocols.
 tags: [claude-code, codex-cli, cursor, claude, gpt-5, codex, gemini, antigravity]
 status: active
 since: 2024-09

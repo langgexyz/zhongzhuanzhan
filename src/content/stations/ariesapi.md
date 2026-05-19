@@ -14,8 +14,6 @@ priceNote_zh: 价格需注册后查看
 priceNote_en: Pricing visible after sign-up
 promo_zh: Codex 低至 0.15× · Claude (CC-AWS 逆向) 0.2× 倍率
 promo_en: Codex from 0.15× · Claude (CC-AWS reverse) 0.2× rate
-short_zh: 自研后端的 AI API Gateway。仅 OpenAI 兼容 `/v1` 协议，不公开模型清单与价格。支付走 Stripe / Airwallex；注册限 @qq.com / @gmail.com 邮箱。
-short_en: Custom-backend AI API Gateway. OpenAI-compatible /v1 only; model catalog and pricing not public. Payments via Stripe / Airwallex; registration limited to @qq.com / @gmail.com emails.
 tags: [claude-code, codex-cli, claude, codex, openai, payment-international]
 status: active
 billing: payg

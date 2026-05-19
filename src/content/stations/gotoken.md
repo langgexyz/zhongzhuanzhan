@@ -29,8 +29,6 @@ priceNote_zh: 订阅制 $10 - $100 / 30 天
 priceNote_en: Subscription, $10 - $100 / 30 days
 promo_zh: 订阅制 $10 - $100 / 30 天，Codex 0.6× 倍率
 promo_en: Subscription $10 - $100 / 30 days, Codex 0.6× rate
-short_zh: 订阅式 OpenAI Codex 多账号路由服务。三档 30 天套餐，按日 / 月配额双限制使用量，含实时用量追踪。
-short_en: Subscription-based multi-account routing for OpenAI Codex. Three 30-day tiers with daily and monthly quota caps, plus real-time usage tracking.
 tags: [codex-cli, codex, gpt-5, subscription]
 status: active
 billing: subscription

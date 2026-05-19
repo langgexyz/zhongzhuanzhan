@@ -2,7 +2,7 @@
 name: gotoken.cc
 name_en: gotoken.cc
 url: https://gotoken.cc/home
-affiliate: https://gotoken.cc/home
+affiliate: https://gotoken.cc/aff/k00g
 models:
   - gpt-5.5
   - gpt-5.4

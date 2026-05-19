@@ -2,6 +2,7 @@
 name: ariesapi.com
 name_en: ariesapi.com
 url: https://ariesapi.com/
+affiliate: https://ariesapi.com/register?aff=HULVCYCTB3Q2
 models:
   - claude-opus-4-7
   - claude-opus-4-7-thinking

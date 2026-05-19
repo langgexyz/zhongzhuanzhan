@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { t, type Lang, pickName, pickPromo, pickPriceNote } from '../lib/i18n';
+import { t, type Lang, pickName, pickPromo } from '../lib/i18n';
 import { stationModelLabels } from '../lib/model-labels';
 
 interface Props {
@@ -20,7 +20,6 @@ const billingLabel: Record<typeof d.billing, string> = {
 
 const name = pickName(d, lang);
 const promo = pickPromo(d, lang);
-const priceNote = pickPriceNote(d, lang);
 
 const ctaHref = d.affiliate ?? d.url;
 const modelLabels = stationModelLabels(d.models);
@@ -69,12 +68,6 @@ const modelsCount = d.models.length;
           </span>
         ))}
       </div>
-    )}
-
-    {priceNote && (
-      <p class="text-[12px] text-[var(--color-fg-mute)] leading-relaxed border-t border-[var(--color-line-soft)] pt-2.5">
-        {priceNote}
-      </p>
     )}
 
     <div class="mt-auto pt-2.5 flex items-center justify-end border-t border-[var(--color-line-soft)]">

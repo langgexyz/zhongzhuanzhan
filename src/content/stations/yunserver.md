@@ -2,7 +2,7 @@
 name: yunserver.cn
 name_en: yunserver.cn
 url: https://api.yunserver.cn/
-affiliate: https://api.yunserver.cn/
+affiliate: https://api.yunserver.cn/register?aff=OPjO
 models:
   - claude-opus-4-7
   - claude-opus-4-6

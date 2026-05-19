@@ -2,6 +2,7 @@
 name: ltoken.shop
 name_en: ltoken.shop
 url: https://api.ltoken.shop/
+affiliate: https://api.ltoken.shop/register?aff=ub39
 models:
   - claude-opus-4-7
   - claude-opus-4-6

@@ -2,7 +2,7 @@
 name: gxair.cn
 name_en: gxair.cn
 url: https://api.gxair.cn/
-affiliate: https://api.gxair.cn/
+affiliate: https://api.gxair.cn/register?aff=tVeK
 models:
   - claude-opus-4-7
   - claude-4-7

@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://zhongzhuanzhan.site',
+  site: 'https://zhongzhuanzhan.langge.me',
   trailingSlash: 'always',
   i18n: {
     defaultLocale: 'zh-CN',

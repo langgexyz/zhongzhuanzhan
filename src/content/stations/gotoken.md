@@ -29,7 +29,6 @@ priceNote_zh: 订阅制 $10 - $100 / 30 天
 priceNote_en: Subscription, $10 - $100 / 30 days
 promo_zh: 订阅制 $10 - $100 / 30 天，Codex 0.6× 倍率
 promo_en: Subscription $10 - $100 / 30 days, Codex 0.6× rate
-tags: [codex-cli, codex, gpt-5, subscription]
 status: active
 billing: subscription
 contact: "QQ 群: qm.qq.com/q/EkLffk7k7m"

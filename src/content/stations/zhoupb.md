@@ -39,7 +39,6 @@ priceNote_zh: 价格视所属号池，需注册后查看
 priceNote_en: Pricing depends on assigned channel pool; visible after sign-up
 promo_zh: Codex 满血号池 0.6× 倍率
 promo_en: Codex 满血 channel pool 0.6× rate
-tags: [claude-code, codex-cli, cursor, claude, gpt-5, codex, gemini, antigravity]
 status: active
 since: 2024-09
 featured: true

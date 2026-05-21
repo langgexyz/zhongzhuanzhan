@@ -39,19 +39,6 @@ function pickFlagshipModels(models: string[]): string[] {
   return picks;
 }
 const flagshipModels = pickFlagshipModels(d.models);
-
-const CLIENT_TAG_LABELS: Record<string, string> = {
-  'claude-code': 'Claude Code',
-  'codex-cli': 'Codex CLI',
-  'cursor': 'Cursor',
-  'cherry-studio': 'Cherry Studio',
-  'lobe-chat': 'Lobe Chat',
-  'cc-switch': 'CC Switch',
-  'aionui': 'AionUI',
-};
-const clientTags = d.tags
-  .filter(t => t in CLIENT_TAG_LABELS)
-  .map(t => CLIENT_TAG_LABELS[t]);
 ---
 
 <article
@@ -93,16 +80,6 @@ const clientTags = d.tags
         {flagshipModels.map(m => (
           <span class="inline-block px-2 py-0.5 rounded border border-[var(--color-line)] text-[var(--color-fg-dim)]">
             {m}
-          </span>
-        ))}
-      </div>
-    )}
-
-    {clientTags.length > 0 && (
-      <div class="flex flex-wrap items-center gap-1.5 text-[11px] font-medium">
-        {clientTags.map(c => (
-          <span class="inline-block px-2 py-0.5 rounded bg-[var(--color-accent-soft)] text-[var(--color-accent-deep)]">
-            {c}
           </span>
         ))}
       </div>

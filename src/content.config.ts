@@ -15,7 +15,6 @@ const stations = defineCollection({
     priceNote_en: z.string().optional(),
     promo_zh: z.string().optional(),
     promo_en: z.string().optional(),
-    tags: z.array(z.string()).default([]),
     status: z.enum(['active', 'unstable', 'down']).default('active'),
     contact: z.string().optional(),
     since: z.string().optional(),

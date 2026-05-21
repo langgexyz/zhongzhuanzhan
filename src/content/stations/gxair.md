@@ -46,7 +46,6 @@ priceNote_zh: 价格视所属号池，需注册后查看
 priceNote_en: Pricing depends on assigned channel pool; visible after sign-up
 promo_zh: codex 池 0.15× · 限时 claude / DeepSeek 0.88× 倍率
 promo_en: codex pool 0.15× · 限时 claude / DeepSeek 0.88× rate
-tags: [claude-code, claude, codex-cli, codex, cursor, gpt-5, gemini, deepseek, grok]
 status: active
 billing: payg
 prices_zh:

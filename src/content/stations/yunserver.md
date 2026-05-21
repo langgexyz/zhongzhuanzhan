@@ -31,7 +31,6 @@ priceNote_zh: GPT-5.4 低至 ¥0.8 / M tokens 起
 priceNote_en: GPT-5.4 from ¥0.8 / M tokens
 promo_zh: GPT-5.4 低至 ¥0.8 / M tokens 起
 promo_en: GPT-5.4 from ¥0.8 / M tokens
-tags: [claude-code, codex-cli, cursor, claude, gpt-5, codex, gemini, deepseek, kimi]
 status: active
 since: 2026-04
 billing: payg

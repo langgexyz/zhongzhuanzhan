@@ -33,7 +33,6 @@ priceNote_zh: 价格视所属号池，需注册后查看
 priceNote_en: Pricing depends on assigned channel pool; visible after sign-up
 promo_zh: "Claude 逆向A1 0.08× · MinMax 0.1× · 智谱 0.1× 倍率"
 promo_en: "Claude 逆向A1 0.08x · MinMax 0.1x · 智谱 0.1x rate"
-tags: [claude-code, codex-cli, cursor, claude, gpt-5, codex, gemini, deepseek]
 status: active
 billing: payg
 ---

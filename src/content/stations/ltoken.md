@@ -33,7 +33,6 @@ priceNote_zh: Claude 按次约 ¥0.02/次起，其余按 token ratio
 priceNote_en: Claude per-request from ¥0.02/req, others by token ratio
 promo_zh: 近期连续降价 — GPT 至原 85%、Claude 五折后再 50%（约 ¥0.02/次起）
 promo_en: Active discount stack — GPT to 85% of previous prices; Claude reduced repeatedly to ~50% × 50% (from ~¥0.02/req)
-tags: [claude-code, claude, codex-cli, codex, cursor, gpt-5, gemini, deepseek, kimi, glm, qwen, minimax]
 status: active
 billing: hybrid
 prices_zh:

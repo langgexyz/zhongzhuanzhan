@@ -39,7 +39,6 @@ priceNote_zh: 价格视所属号池，需注册后查看
 priceNote_en: Pricing depends on assigned channel pool; visible after sign-up
 promo_zh: "福利分组 0.1× · cx2cc 0.15× · kiro 0.2× 倍率"
 promo_en: "福利分组 0.1x · cx2cc 0.15x · kiro 0.2x rate"
-tags: [claude-code, codex-cli, cursor, claude, gpt-5, codex, gemini, deepseek]
 status: active
 billing: payg
 ---

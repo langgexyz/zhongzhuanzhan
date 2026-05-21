@@ -20,6 +20,13 @@ const canonical = `${siteUrl}${localizedPath(lang, path)}`;
 const alt = altLangPath(lang, path);
 const altCanonical = `${siteUrl}${alt.href}`;
 const htmlLang = lang === 'zh-CN' ? 'zh-CN' : 'en';
+
+const QR_EXPIRY_ISO = '2026-05-28';
+const expiryDate = new Date(QR_EXPIRY_ISO);
+const expiryFormatted = lang === 'zh-CN'
+  ? `${expiryDate.getMonth() + 1}月${expiryDate.getDate()}日`
+  : expiryDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+const wechatExpiryText = ui.wechat_expiry.replace('{date}', expiryFormatted);
 ---
 
 <!doctype html>
@@ -63,6 +70,42 @@ const htmlLang = lang === 'zh-CN' ? 'zh-CN' : 'en';
           <span class="text-[11px] font-mono text-[var(--color-fg-mute)]">zhongzhuanzhan.site</span>
         </a>
         <nav class="flex items-center gap-5 sm:gap-6 text-[14px] font-medium text-[var(--color-fg-dim)]">
+          <div class="relative">
+            <button
+              id="wechat-trigger"
+              type="button"
+              aria-expanded="false"
+              aria-controls="wechat-popover"
+              class="inline-flex items-center gap-1 hover:text-[var(--color-accent)] text-[var(--color-fg-mute)] cursor-pointer"
+            >
+              <span>{ui.nav_wechat_group}</span>
+              <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                <path d="M2 3.5L5 6.5L8 3.5" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div
+              id="wechat-popover"
+              role="dialog"
+              aria-labelledby="wechat-popover-title"
+              hidden
+              class="absolute right-0 top-[calc(100%+10px)] w-80 max-w-[calc(100vw-2rem)] p-4 rounded-xl bg-[var(--color-bg)] border border-[var(--color-line)] shadow-lg z-30"
+            >
+              <div id="wechat-popover-title" class="text-[13px] font-semibold text-[var(--color-fg)] mb-2.5">
+                {ui.wechat_title}
+              </div>
+              <img
+                src="/wechat-qr.jpg"
+                alt={ui.wechat_qr_alt}
+                width="720"
+                height="1008"
+                class="block w-full h-auto rounded-md border border-[var(--color-line-soft)]"
+                loading="lazy"
+              />
+              <div class="mt-2.5 text-[11px] text-[var(--color-fg-mute)] leading-relaxed">
+                {wechatExpiryText}
+              </div>
+            </div>
+          </div>
           <a href={alt.href} hreflang={alt.lang} class="hover:text-[var(--color-accent)] text-[var(--color-fg-mute)]">
             {ui.nav_lang_switch}
           </a>
@@ -73,6 +116,32 @@ const htmlLang = lang === 'zh-CN' ? 'zh-CN' : 'en';
     <main class="max-w-5xl mx-auto px-6 sm:px-8 pb-20">
       <slot />
     </main>
+
+    <script>
+      const trigger = document.getElementById('wechat-trigger');
+      const popover = document.getElementById('wechat-popover');
+      if (trigger && popover) {
+        const close = () => {
+          popover.setAttribute('hidden', '');
+          trigger.setAttribute('aria-expanded', 'false');
+        };
+        const open = () => {
+          popover.removeAttribute('hidden');
+          trigger.setAttribute('aria-expanded', 'true');
+        };
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          popover.hasAttribute('hidden') ? open() : close();
+        });
+        document.addEventListener('click', (e) => {
+          const target = e.target as Node;
+          if (!popover.contains(target) && !trigger.contains(target)) close();
+        });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') close();
+        });
+      }
+    </script>
 
     <footer class="mt-24 border-t border-[var(--color-line)]">
       <div class="max-w-5xl mx-auto px-6 sm:px-8 py-6 text-[13px] text-[var(--color-fg-mute)] flex flex-col sm:flex-row gap-2 sm:justify-between">

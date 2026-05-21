@@ -30,6 +30,11 @@ export const ui = {
 补充说明：
 `,
     nav_lang_switch: 'English',
+    nav_wechat_group: '微信群',
+    wechat_title: '群聊：zhongzhuanzhan.site',
+    wechat_expiry: '7 天内有效（{date} 前过期），过期请刷新本页',
+    wechat_qr_alt: '微信群二维码',
+    wechat_close: '关闭',
     hero_q_pre: 'Claude / Codex / Gemini 中转站',
     hero_q_emph: '全集',
     hero_q_post: '。',
@@ -76,6 +81,11 @@ Online since (optional):
 Additional notes:
 `,
     nav_lang_switch: '中文',
+    nav_wechat_group: 'WeChat Group',
+    wechat_title: 'Group chat: zhongzhuanzhan.site',
+    wechat_expiry: 'Valid through {date}. If expired, please refresh this page.',
+    wechat_qr_alt: 'WeChat group QR code',
+    wechat_close: 'Close',
     hero_q_pre: 'The ',
     hero_q_emph: 'full index',
     hero_q_post: ' of Claude / Codex / Gemini relay stations.',

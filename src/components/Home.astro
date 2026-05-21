@@ -16,7 +16,7 @@ const stations: CollectionEntry<'stations'>[] = await getCollection('stations');
 
 stations.sort((a, b) => {
   if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
-  return a.data.name.localeCompare(b.data.name);
+  return b.data.name.localeCompare(a.data.name);
 });
 
 const modelIndex = buildModelIndex(stations);
